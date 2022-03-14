@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+    font-family: 'Nunito', sans-serif;;
+}
+
+.table th, td {
+    font-size: 14px;
+}
+
+.card h4 {
+    color: rgba(236, 38, 143, 1);
+}
+
+.card p {
+    color: rgb(58, 58, 58);
+}
+
+.card .btnGreen {
+    background: #01E2A5;
+    color: white;
+}
+
+.card .btnGreen a:hover{
+    background: #124b3c;
+}
+
+.card-header {
+    background: -webkit-linear-gradient(rgba(236, 38, 143, 1), rgba(14, 14, 14, 0.59));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 18px;
+}
