@@ -376,6 +376,33 @@
 
 			});
 		});
+
+		$("#info-uk-siswa").on('click', '.mulai-ujian-essay', function(e) {
+			e.preventDefault();
+			var id_bab 	= $(e.currentTarget).attr("data-bab-id");
+			console.log(id_bab);
+			$.ajax({
+				type: "POST",
+				url: "<?= base_url('uji_kompetensi/Ujian/cek_ujian') ?>",
+				data: {
+					id_bab : id_bab
+				},
+				dataType: 'json',
+				success: function(response) {
+					console.log(response);
+                    if (response.success == true) {
+						window.location = "<?= base_url('uji_kompetensi/Ujian/uji_kompetensi')?>/"+id_bab;
+                    } else {
+						Swal.fire({
+							icon: 'warning',
+							title: 'Oppss...',
+							text: response.msgujian,
+						})
+					}
+				}
+
+			});
+		});
 	</script>
 	
 	<script>

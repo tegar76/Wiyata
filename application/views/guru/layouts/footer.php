@@ -1083,6 +1083,60 @@
 				},
 			});
 		});
+
+		$(document).ready(function() {
+			var id_uk = $("#pemb_uk").val();
+			console.log(id_uk);
+			$('#table-result-ev-essay').DataTable({
+				aLengthMenu: [
+					[25, 50, 100, 200, -1],
+					[25, 50, 100, 200, "All"]
+				],
+				iDisplayLength: -1,
+				"language" : {
+					"url" : "http://cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
+					"sEmptyTables" : "Tidads"
+				},
+				"ajax": {
+					url: "<?= base_url('Guru/DataTugas/get_tabel_ev_essay?type=data_uk_siswa'); ?>",
+					type: 'POST',
+					data : {
+						id_uk : id_uk
+					},
+					async: true,
+					dataType: 'json',
+					"processing": true,
+					"serverSide": true,
+					"bDestroy": true,
+				},
+				rowCallback: function(row, data, iDisplayIndex) {
+					$('td:eq(0)', row).html();
+				},
+			});
+			$('#tabel-pemb-uk').DataTable({
+				destroy: true,
+				"language" : {
+					"url" : "http://cdn.datatables.net/plug-ins/1.10.9/i18n/Indonesian.json",
+					"sEmptyTables" : "Tidads"
+				},
+				"lengthMenu": [[1, 3, 7, -1], [1, 3, 7, "All"]],
+				"ajax": {
+					url: "<?= base_url('Guru/DataTugas/get_tabel_ev_essay?type=info_uk_detail'); ?>",
+					type: 'POST',
+					data : {
+						id_uk : id_uk
+					},
+					async: true,
+					dataType: 'json',
+					"processing": true,
+					"serverSide": true,
+					"bDestroy": true,
+				},
+				rowCallback: function(row, data, iDisplayIndex) {
+					$('td:eq(0)', row).html();
+				},
+			});
+		});
 	</script>
 
 	<script>

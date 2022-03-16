@@ -62,7 +62,8 @@
           data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item <?php if($this->uri->segment(3)=="latihansiswa"){echo 'active"';} ?>" href="<?= base_url('Guru/DataTugas/latihansiswa') ?>">Latihan Siswa</a>
-              <a class="collapse-item <?php if($this->uri->segment(3)=="ujikompetensi"){echo 'active"';} ?>" href="<?= base_url('Guru/DataTugas/ujikompetensi')?>">Uji Kompetensi</a>
+              <a class="collapse-item <?php if($this->uri->segment(3)=="ujikompetensi"){echo 'active"';} ?>" href="<?= base_url('Guru/DataTugas/ujikompetensi')?>">Evaluasi (Pilgan)</a>
+              <a class="collapse-item <?php if($this->uri->segment(3)=="ujikompetensi"){echo 'active"';} ?>" href="<?= base_url('Guru/DataTugas/evaluasiEssay')?>">Evaluasi (Essay)</a>
           </div>
       </div>
   </li>

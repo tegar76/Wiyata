@@ -354,42 +354,100 @@
             $this->load->view('guru/layouts/footer', $ParseData);
         }
 
-        // Uji Kompetensi Detail
-        public function ujiKompetensiDetail($kelas, $bab, $id_pemb_uk)
+         // Uji Kompetensi Detail
+         public function ujiKompetensiDetail($kelas, $bab, $id_pemb_uk)
+         {
+             is_guru();
+             $dataGuru 	= $this->get_guru;
+             $cek_uk 	= $this->secure->decrypt_url($id_pemb_uk);
+ 
+             // get data siswa
+             $get_uk 	= $this->guru->pemb_kompetensi_id(['id_pemb_uk' => $cek_uk])->row_array();
+             $data_siswa	= $this->db->get_where('tb_siswa',['id_kelas' => $get_uk['id_kelas']]);
+             // siswa mengerjakan
+             $siswa_mengerjakan =  $this->guru->get_uk_siswa([
+                 'id_kelas' => $get_uk['id_kelas'],
+                 'id_bab' => $get_uk['id_bab'],
+                 'keterangan' => '1'
+             ])->num_rows();
+ 
+             // siswa tidak mengerjakan
+             $belum_mengerjakan = $data_siswa->num_rows() - $siswa_mengerjakan;
+ 
+             $ParseData = [
+                 'title' 			=>	'Guru Wiayta E-Learning | Tugas Latihan Siswa',
+                 'data_guru' 		=> 	$dataGuru,
+                 'get_uk'			=> 	$get_uk,
+                 'jumlah_siswa'		=> 	$data_siswa->num_rows(),
+                 'siswa_mengerjakan'	=> 	$siswa_mengerjakan,
+                 'belum_mengerjakan'	=>	$belum_mengerjakan,
+                 'data_siswa'		=>	$data_siswa->result_array()
+             ];
+ 
+             $this->load->view('guru/layouts/header', $ParseData);
+             $this->load->view('guru/layouts/sidebar', $ParseData);
+             $this->load->view('guru/layouts/topbar', $ParseData);
+             $this->load->view('guru/data_tugas/uji_kompetensi_detail', $ParseData);
+             $this->load->view('guru/layouts/footer', $ParseData);
+         }
+
+        public function evaluasiEssay()
         {
             is_guru();
-            $dataGuru 	= $this->get_guru;
-            $cek_uk 	= $this->secure->decrypt_url($id_pemb_uk);
-
-            // get data siswa
-            $get_uk 	= $this->guru->pemb_kompetensi_id(['id_pemb_uk' => $cek_uk])->row_array();
-            $data_siswa	= $this->db->get_where('tb_siswa',['id_kelas' => $get_uk['id_kelas']]);
-            // siswa mengerjakan
-            $siswa_mengerjakan =  $this->guru->get_uk_siswa([
-                'id_kelas' => $get_uk['id_kelas'],
-                'id_bab' => $get_uk['id_bab'],
-                'keterangan' => '1'
-            ])->num_rows();
-
-            // siswa tidak mengerjakan
-            $belum_mengerjakan = $data_siswa->num_rows() - $siswa_mengerjakan;
-
+            $dataGuru = $this->get_guru;
             $ParseData = [
-                'title' 			=>	'Guru Wiayta E-Learning | Tugas Latihan Siswa',
-                'data_guru' 		=> 	$dataGuru,
-                'get_uk'			=> 	$get_uk,
-                'jumlah_siswa'		=> 	$data_siswa->num_rows(),
-                'siswa_mengerjakan'	=> 	$siswa_mengerjakan,
-                'belum_mengerjakan'	=>	$belum_mengerjakan,
-                'data_siswa'		=>	$data_siswa->result_array()
+                'title' => 'Guru Wiayta E-Learning | Tugas Latihan Siswa',
+                'data_guru' => $dataGuru,
+                'pemberitahuan_uk' => $this->guru->get_pemberitahuan_uk()->result_array(),
+                'getBab' 	=>	$this->guru->get_datatable('tb_bab')->result_object(),
+                'kelas' 	=>	$this->db->get_where('tb_kelas', ['id_guru' => $this->get_guru['id_guru']])->result_object(),
             ];
 
             $this->load->view('guru/layouts/header', $ParseData);
             $this->load->view('guru/layouts/sidebar', $ParseData);
             $this->load->view('guru/layouts/topbar', $ParseData);
-            $this->load->view('guru/data_tugas/uji_kompetensi_detail', $ParseData);
+            $this->load->view('guru/data_tugas/evaluasi_essay', $ParseData);
             $this->load->view('guru/layouts/footer', $ParseData);
         }
+
+       
+
+         // Uji Kompetensi Detail
+         public function evaluasiEssayDetail($kelas, $bab, $id_pemb_uk)
+         {
+             is_guru();
+             $dataGuru 	= $this->get_guru;
+             $cek_uk 	= $this->secure->decrypt_url($id_pemb_uk);
+ 
+             // get data siswa
+             $get_uk 	= $this->guru->pemb_kompetensi_id(['id_pemb_uk' => $cek_uk])->row_array();
+             $data_siswa	= $this->db->get_where('tb_siswa',['id_kelas' => $get_uk['id_kelas']]);
+             // siswa mengerjakan
+             $siswa_mengerjakan =  $this->guru->get_uk_siswa([
+                 'id_kelas' => $get_uk['id_kelas'],
+                 'id_bab' => $get_uk['id_bab'],
+                 'keterangan' => '1'
+             ])->num_rows();
+ 
+             // siswa tidak mengerjakan
+             $belum_mengerjakan = $data_siswa->num_rows() - $siswa_mengerjakan;
+ 
+             $ParseData = [
+                 'title' 			=>	'Guru Wiayta E-Learning | Tugas Latihan Siswa',
+                 'data_guru' 		=> 	$dataGuru,
+                 'get_uk'			=> 	$get_uk,
+                 'jumlah_siswa'		=> 	$data_siswa->num_rows(),
+                 'siswa_mengerjakan'	=> 	$siswa_mengerjakan,
+                 'belum_mengerjakan'	=>	$belum_mengerjakan,
+                 'data_siswa'		=>	$data_siswa->result_array()
+             ];
+ 
+             $this->load->view('guru/layouts/header', $ParseData);
+             $this->load->view('guru/layouts/sidebar', $ParseData);
+             $this->load->view('guru/layouts/topbar', $ParseData);
+             $this->load->view('guru/data_tugas/evaluasi_essay_detail', $ParseData);
+             $this->load->view('guru/layouts/footer', $ParseData);
+         }
 
 
         public function cek_ujikompetensi()
@@ -634,7 +692,95 @@
 					$sub_array[] = 	($value->tanggal_mulai == null) ? ' - ' : date('d-m-Y', strtotime($value->tanggal_mulai));
 					$sub_array[] = 	($value->tanggal_dibuat == '0000-00-00') ? ' - ' : date('d-m-Y', strtotime($value->tanggal_dibuat));
 					$sub_array[] = 	($value->tanggal_diedit == '0000-00-00') ? ' - ' : date('d-m-Y', strtotime($value->tanggal_diedit));
-					$sub_array[] =	'<div class="text-center"><a href="'. base_url('Guru/DataTugas/ujiKompetensiDetail/' . $value->kelas_nama . '/' . $value->bab_ke . '/' . $this->secure->encrypt_url($value->id_pemb_uk)) .'"><button class="btn btn-sm btn-info pl-3 pr-4"><i class="fa fa-search ml-3"></i> Cek UK</button></a></div>';
+					$sub_array[] =	'<div class="text-center"><a href="'. base_url('Guru/DataTugas/ujiKompetensiDetail/' . $value->kelas_nama . '/' . $value->bab_ke . '/' . $this->secure->encrypt_url($value->id_pemb_uk)) .'"><button class="btn btn-sm btn-info pl-3 pr-4"><i class="fa fa-search ml-3"></i> Cek Evaluasi</button></a></div>';
+					$data[] = $sub_array;
+				}
+				$result = array(
+					'draw' 	=> $draw,
+					'recordTotal' => $query->num_rows(),
+					'recordFiltered' 	=> $query->num_rows(),
+					'data' => $data
+				);
+			} elseif($datatable == 'info_uk_detail') {
+				foreach($pemb_uk->result() as $row => $value) {
+					$sub_array = array();
+					$sub_array[] = 	$no++;
+					$sub_array[] = 	$value->kelas_nama;
+					$sub_array[] = 	$value->mapel;
+					$sub_array[] = 	'BAB ' . $value->bab_ke;
+					$sub_array[] =	(empty($value->tanggal_mulai)) ? '-' : date('d-m-Y', strtotime($value->tanggal_mulai));
+					$sub_array[] =	(empty($value->waktu_mulai)) ? '-' : date('H:i', strtotime($value->waktu_mulai)) . ' WIB';
+					$sub_array[] =	(empty($value->waktu_selesai)) ? '-' : date('H:i', strtotime($value->waktu_selesai)) . ' WIB';
+					$sub_array[] =	($value->tanggal_dibuat == '0000-00-00') ? ' - ' : date('d-m-Y', strtotime($value->tanggal_dibuat));
+					$sub_array[] =	($value->tanggal_diedit == '0000-00-00') ? ' - ' : date('d-m-Y', strtotime($value->tanggal_diedit));
+					$sub_array[] =	'<div class="text-center"><button class="btn btn-sm btnGreen pl-5 pr-5 mt-2 edit-pemb-uk" data-uk-id="'. $value->id_pemb_uk .'" title="Edit Pemberitahuan UK">Edit</button></div>';
+					$data[] = $sub_array;
+				}
+				$result = array(
+					'draw' 	=> $draw,
+					'recordTotal' => $pemb_uk->num_rows(),
+					'recordFiltered' 	=> $pemb_uk->num_rows(),
+					'data' => $data
+				);
+			} elseif($datatable == 'data_uk_siswa') {
+				$info 	= $pemb_uk->row_object();
+				$student= $this->db->get_where('tb_siswa', ['id_kelas' => $info->id_kelas]);
+				foreach($student->result() as $row => $value) {
+					$nilai_siswa = $this->db->get_where('tb_uk_siswa', [
+						'id_bab' => $info->id_bab,
+						'id_siswa' => $value->id_siswa
+					])->row_object();
+					$sub_array	= array();
+					$sub_array[] = 	$no++;
+					$sub_array[] = 	$value->siswa_nama;
+					$sub_array[] = 	$value->siswa_nis;
+					$sub_array[] = 	$value->siswa_jenis_kelamin;
+					if($nilai_siswa) {
+						$sub_array[] =	(empty($nilai_siswa->jumlah_soal)) ? '<div class="text-center">-</div>' : $nilai_siswa->jumlah_soal;
+						$sub_array[] =	(empty($nilai_siswa->jumlah_benar)) ? '<div class="text-center">-</div>' : $nilai_siswa->jumlah_benar;
+						$sub_array[] =	(empty($nilai_siswa->jumlah_salah)) ? '<div class="text-center">-</div>' : $nilai_siswa->jumlah_salah;
+						$sub_array[] =	(empty($nilai_siswa->tidak_dijawab)) ? '<div class="text-center">-</div>' : $nilai_siswa->tidak_dijawab;
+						$sub_array[] =	(empty($nilai_siswa->nilai_uk)) ? '<div class="text-center">-</div>' : $nilai_siswa->nilai_uk;
+					} else {
+						$sub_array[] = '<div class="text-center">-</div>';
+						$sub_array[] = '<div class="text-center">-</div>';
+						$sub_array[] = '<div class="text-center">-</div>';
+						$sub_array[] = '<div class="text-center">-</div>';
+						$sub_array[] = '<div class="text-center">-</div>';
+					}
+					$data[] = $sub_array;
+				}
+				$result = array(
+					'draw' 	=> $draw,
+					'recordTotal' => $student->num_rows(),
+					'recordFiltered' 	=> $student->num_rows(),
+					'data' => $data
+				);
+			}
+			echo json_encode($result);
+		}
+
+        	# Ajax table evaluasi essay
+		public function get_tabel_ev_essay() {
+			$dataGuru = $this->get_guru;
+			$datatable = $this->input->get('type');
+			$draw = intval($this->input->get("draw"));
+			$data = array();
+			$no   = 1;
+			$id_uk = $this->input->post('id_uk', true);
+			$pemb_uk = $this->guru->pemb_kompetensi_id(['id_pemb_uk' => $id_uk]);
+			if($datatable == 'info_uk') {
+				$query = $this->guru->pemb_kompetensi_id(['tb_kelas.id_guru' => $dataGuru['id_guru']]);
+				foreach($query->result() as $row => $value) {
+					$sub_array = array();
+					$sub_array[] = 	$no++;
+					$sub_array[] = 	$value->kelas_nama;
+					$sub_array[] = 	$value->mapel;
+					$sub_array[] = 	'BAB ' . $value->bab_ke;
+					$sub_array[] = 	($value->tanggal_mulai == null) ? ' - ' : date('d-m-Y', strtotime($value->tanggal_mulai));
+					$sub_array[] = 	($value->tanggal_dibuat == '0000-00-00') ? ' - ' : date('d-m-Y', strtotime($value->tanggal_dibuat));
+					$sub_array[] = 	($value->tanggal_diedit == '0000-00-00') ? ' - ' : date('d-m-Y', strtotime($value->tanggal_diedit));
+					$sub_array[] =	'<div class="text-center"><a href="'. base_url('Guru/DataTugas/evaluasiEssayDetail/' . $value->kelas_nama . '/' . $value->bab_ke . '/' . $this->secure->encrypt_url($value->id_pemb_uk)) .'"><button class="btn btn-sm btn-info pl-3 pr-4"><i class="fa fa-search ml-3"></i> Cek UK</button></a></div>';
 					$data[] = $sub_array;
 				}
 				$result = array(

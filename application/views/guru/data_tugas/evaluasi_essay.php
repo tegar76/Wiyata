@@ -3,10 +3,10 @@
 
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h1 class="h3 mb-0 text-gray-800">Evaluasi (Pilgan) </h1>
+		<h1 class="h3 mb-0 text-gray-800">Evaluasi (Essay)</h1>
 	</div>
 	<div class="mb-2">
-		<a href="" class="btn btn-primary mt-4" data-toggle="modal" data-target="#cekUjiKompetensimodal" id="cekUjiKompetensi">Cek Evaluasi Siswa (Pilgan)</a>
+		<a href="" class="btn btn-primary mt-4" data-toggle="modal" data-target="#cekUjiKompetensimodal" id="cekUjiKompetensi">Cek Evaluasi Siswa (Essay)</a>
 	</div>
 	<div class="row">
 		<div class="col-xs-6 col-sm-12">
@@ -56,7 +56,7 @@
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title text-center" id="cekUjiKompetensimodallabel"> Form Cek Evaluasi Siswa (Pilgan)</h5>
+				<h5 class="modal-title text-center" id="cekUjiKompetensimodallabel"> Form Cek Evaluasi Siswa (Essay)</h5>
 			</div>
 			<div class="modal-body">
 				<?= form_open_multipart('#', ['id' => 'cek_uk']) ?>

@@ -399,11 +399,11 @@
 		</div> <!-- overlayContainer -->
 
 	</div> <!-- outerContainer -->
-	<div id="printContainer"></div>
+	<div id="printContainer"></div> <br> <hr>
 
 	<div class="container mt-5">
     <div class="row">
-        <div class="col-xs-6 col-sm-12">
+        <div class="col-xs-6 col-sm-12"> 
             
             <div class="card shadow mb-4 bg-white">
 			<h3 class="card-header bg-white mb-3 font-weight-bold">Form Pengumpulan Evaluasi</h3>
@@ -419,8 +419,8 @@
 							<img src="<?= base_url() ?>assets/siswa/img/VectorInfo.png" alt="" width="22px" onclick="alertTugasInfo2()" style="margin-left: 10px;">
 						</div>
 						<div class="form-group">
-							<button type="reset" class="btn btn-secondary">Reset</button>
-							<button type="submit" class="btn btn-success">Serahkan</button>
+							<button type="reset" class="btn btn-lg btn-secondary">Reset</button>
+							<button type="submit" class="btn btn-lg btn-success">Serahkan</button>
 						</div>
 					</form>
 				</div>
@@ -432,7 +432,7 @@
 	<script>
 	function alertTugasInfo2() {
 		document.getElementById("alertTugasInfo2").innerHTML =
-			'<div class="alert alert-warning alert-dismissible fade show mr-5" role="alert">Catatan : <br> Upload File format jpg atau png,Jika upload lebih dari 1 file maka uploadnya dalam bentuk pdf <br><br><a target="_blank" href="<?= base_url('ruang_materi/BahanAjar/unduh_panduan') ?>"><strong>Berikut Panduannya</strong></a> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+			'<div class="alert alert-warning alert-dismissible fade show mr-5" role="alert">Catatan : <br> Upload File format jpg atau png, Maksimal berukuran 2 MB, Jika upload lebih dari 1 file maka uploadnya dalam bentuk pdf <br><br><a target="_blank" href="<?= base_url('ruang_materi/BahanAjar/unduh_panduan') ?>"><strong>Berikut Panduannya</strong></a> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 	}
 </script>
 

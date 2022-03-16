@@ -224,7 +224,32 @@
             $this->load->view('siswa/uji_kompetensi/nilai_uk',  $ParseData);
             $this->load->view('siswa/layouts/footer',  $ParseData);
         }
+
+		public function nilai_ujian_pilgan() {
+
+			$ParseData = [
+				'title' => 'Wiyata E-Learning | Hasil Evaluasi BAB',
+			]; 
+
+            $this->load->view('siswa/layouts/header', $ParseData);
+            $this->load->view('siswa/layouts/navbar',  $ParseData);
+            $this->load->view('siswa/uji_kompetensi/hasil_uk_pilgan',  $ParseData);
+            $this->load->view('siswa/layouts/footer',  $ParseData);
+		}
         
+		public function nilai_ujian_essay() {
+
+			$ParseData = [
+				'title' => 'Wiyata E-Learning | Hasil Evaluasi BAB',
+			]; 
+
+            $this->load->view('siswa/layouts/header', $ParseData);
+            $this->load->view('siswa/layouts/navbar',  $ParseData);
+            $this->load->view('siswa/uji_kompetensi/hasil_uk_essay',  $ParseData);
+            $this->load->view('siswa/layouts/footer',  $ParseData);
+		}
+        
+
         public function cetak_nilai($id)
     	{
     		if ($id == null) {

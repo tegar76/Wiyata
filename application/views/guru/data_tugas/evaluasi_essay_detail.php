@@ -1,12 +1,13 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-<div class="none mt-3 mb-5 mr-4">
-		<h6 class="text-right"> Data Tugas / <a class="text-primary" href="<?= base_url('Guru/DataTugas/UjiKompetensi') ?>" style="text-decoration: none;">Cek Data Evaluasi (Pilgan)</a> / Data Evaluasi Detail (Pilgan)</h6>
+	<div class="none mt-3 mb-5 mr-4">
+		<h6 class="text-right"> Data Tugas / <a class="text-primary" href="<?= base_url('Guru/DataTugas/evaluasiEssay') ?>" style="text-decoration: none;">Cek Data Evaluasi (Essay)</a> / Data Evaluasi Detail (Essay)</h6>
 	</div>
+
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
-		<h5 class="mb-0 text-gray-800">Data Evaluasi Siswa (Pilgan)  <?= 'Bab ' . $get_uk['bab_ke'] . ' Kelas ' . $get_uk['kelas_nama']  ?></h5>
+		<h5 class="mb-0 text-gray-800">Data Evaluasi Siswa (Essay) <?= 'Bab ' . $get_uk['bab_ke'] . ' Kelas ' . $get_uk['kelas_nama']  ?></h5>
 	</div>
 
 	<!-- Content Row -->
@@ -118,7 +119,7 @@
 				
 				<div class="card-body">
 					<div class="table-responsive">
-						<table id="table-result-uk" class="table table-striped table-bordered" style="width:100%">
+						<table id="table-result-ev-essay" class="table table-striped table-bordered" style="width:100%">
 							<thead>
 								<tr>
 									<th>No</th>
